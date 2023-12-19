@@ -1,5 +1,10 @@
 <div class="flex flex-col gap-8">
     <h1 class="text-4xl font-bold">Users</h1>
+    <div>
+        <a routerLink="add-user">
+            <button class="btn-add">Add new user</button>
+        </a>
+    </div>
     <table class="" style="width: 100%;">
         <thead>
             <tr>
@@ -19,8 +24,10 @@
                 <td>{{user.lastName}}</td>
                 <td>{{user.username}}</td>
                 <td class="flex gap-4 justify-center">
-                    <button class="btn-edit">Edit</button>
-                    <button class="btn-delete">Delete</button>
+                    <a [routerLink]="user.id + ''">
+                        <button class="btn-edit">Edit</button>
+                    </a>
+                    <button (click)="deleteUserById(user.id)" class="btn-delete">Delete</button>
                 </td>
             </tr>
         </tbody>

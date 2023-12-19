@@ -3,7 +3,7 @@ td {
     @apply text-center py-2 border border-gray-200
 }
 
-td>button {
+button {
     @apply px-2 py-1 rounded-md text-white transition-all
 }
 
@@ -13,4 +13,8 @@ td>button {
 
 .btn-delete {
     @apply bg-rose-500 hover:bg-rose-600
+}
+
+.btn-add {
+    @apply bg-emerald-800 hover:bg-emerald-900 px-4 py-2
 }
