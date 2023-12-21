@@ -1,16 +1,26 @@
-<div class="w-screen h-screen overflow-hidden flex flex-col">
+<ng-container *ngIf="currentUser$ | async">
     <nav class="fixed top-0 w-screen h-[60px] bg-slate-800 text-white">
-        <div class="flex items-center h-full mx-auto container gap-8">
-            <a routerLink="/home">Home</a>
-            <a routerLink="/users">Users</a>
+        <div class="flex items-center h-full justify-between mx-auto container ">
+            <div class="flex items-center h-full gap-8">
+                <a routerLink="/home">Home</a>
+                <a routerLink="/users">Users</a>
+            </div>
+
+            <div>
+                <button (click)="logout()">Logout</button>
+            </div>
         </div>
     </nav>
+</ng-container>
 
-    <div class="p-8 mt-[60px] flex-1">
+<div class="w-screen h-screen overflow-hidden flex flex-col">
+    <div class="flex-1">
         <router-outlet></router-outlet>
     </div>
 
-    <footer>
-        <h3 class="text-3xl font-medium text-center">Angular CRUD</h3>
-    </footer>
+    <ng-container *ngIf="currentUser$ | async">
+        <footer>
+            <h3 class="text-3xl font-medium text-center">Angular CRUD</h3>
+        </footer>
+    </ng-container>
 </div>

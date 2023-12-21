@@ -1,0 +1,75 @@
+<div class="p-6 rounded-lg shadow-md border border-gray-200 min-w-[400px]">
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="flex flex-col gap-8">
+        <h1 class="text-3xl font-bold text-center">Register</h1>
+        <div class="flex flex-col gap-6">
+            <div class="flex gap-6">
+                <div class="flex flex-col gap-2">
+                    <label class="text-base font-medium" for="firstName">First Name</label>
+                    <input class="outline-none border border-slate-300 rounded-md px-4 py-2 focus:border-slate-500"
+                        type="text" id="firstName" placeholder="First Name" formControlName="firstName">
+                    <div class="text-base text-rose-500"
+                        *ngIf="(registerForm.get('firstName')?.errors?.['required'] && registerForm.controls['firstName'].touched)">
+                        <p>First Name is required!</p>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label class="text-base font-medium" for="lastName">Last Name</label>
+                    <input class="outline-none border border-slate-300 rounded-md px-4 py-2 focus:border-slate-500"
+                        type="text" id="lastName" placeholder="Last Name" formControlName="lastName">
+                    <div class="text-base text-rose-500"
+                        *ngIf="(registerForm.get('lastName')?.errors?.['required'] && registerForm.controls['lastName'].touched)">
+                        <p>Last Name is required!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col gap-2">
+                <label class="text-base font-medium" for="username">Username</label>
+                <input class="outline-none border border-slate-300 rounded-md px-4 py-2 focus:border-slate-500"
+                    type="text" id="username" placeholder="Username" formControlName="username">
+                <div class="text-base text-rose-500"
+                    *ngIf="(registerForm.get('username')?.errors?.['required'] && registerForm.controls['username'].touched)">
+                    <p>Username is required!</p>
+                </div>
+                <div class="text-base text-rose-500"
+                    *ngIf="(registerForm.get('username')?.errors?.['minlength'] && registerForm.controls['username'].dirty)">
+                    <p>Username must be least 3 characters!!</p>
+                </div>
+            </div>
+            <div class=" flex flex-col gap-2">
+                <label class="text-base font-medium" for="password">Password</label>
+                <input class="outline-none border border-slate-300 rounded-md px-4 py-2 focus:border-slate-500"
+                    type="password" id="password" placeholder="Password" formControlName="password">
+                <div class="text-base text-rose-500"
+                    *ngIf="(registerForm.get('password')?.errors?.['required'] && registerForm.controls['password'].touched)">
+                    <p>Password is required!</p>
+                </div>
+                <div class="text-base text-rose-500"
+                    *ngIf="(registerForm.get('password')?.errors?.['minlength'] && registerForm.controls['password'].dirty)">
+                    <p>Password must be least 3 characters!!</p>
+                </div>
+            </div>
+            <div class="flex flex-col gap-2">
+                <label class="text-base font-medium" for="confirmPassword">Confirm Password</label>
+                <input class="outline-none border border-slate-300 rounded-md px-4 py-2 focus:border-slate-500"
+                    type="password" id="confirmPassword" placeholder="Confirm Password"
+                    formControlName="confirmPassword">
+                <div class="text-base text-rose-500"
+                    *ngIf="(registerForm.get('confirmPassword')?.errors?.['required'] && registerForm.controls['confirmPassword'].touched)">
+                    <p>Confirm Password is required!</p>
+                </div>
+                <div class="text-base text-rose-500"
+                    *ngIf="(registerForm.get('confirmPassword')?.errors?.['minlength'] && registerForm.controls['confirmPassword'].dirty)">
+                    <p>Confirm Password must be least 3 characters!</p>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col">
+            <button [disabled]="registerForm.invalid" type="submit" [ngClass]="{'disabled': registerForm.invalid}"
+                class="btn-submit px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 text-white">Submit</button>
+            <a routerLink="/account/login"
+                class="cursor-pointer my-4 text-end text-blue-500 hover:text-blue-600 underline underline-offset-2">
+                Already have an account? Login
+            </a>
+        </div>
+    </form>
+</div>

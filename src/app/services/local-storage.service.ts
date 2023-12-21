@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { User } from '../model/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocalStorageService {
-
   storage!: Storage;
 
   constructor() {
@@ -18,10 +17,14 @@ export class LocalStorageService {
     return obj || null;
   }
 
-  public setValue(key: string, value: User[]): void {
+  public setValue(key: string, value: any): void {
     if (!value) {
       return;
     }
     this.storage[key] = JSON.stringify(value);
+  }
+
+  public removeItem(key: string) {
+    this.storage.removeItem(key);
   }
 }

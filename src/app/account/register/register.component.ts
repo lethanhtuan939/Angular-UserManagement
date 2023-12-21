@@ -1,23 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-add-user',
-  templateUrl: './add-user.component.html',
-  styleUrls: ['./add-user.component.scss'],
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss'],
 })
-export class AddUserComponent implements OnInit {
-  public addForm!: FormGroup;
+export class RegisterComponent implements OnInit {
+  public registerForm!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.addForm = this.formBuilder.group({
+    this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       username: [
@@ -35,8 +37,8 @@ export class AddUserComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    const value = this.addForm.value;
+  public onRegister() {
+    const value = this.registerForm.value;
     if (value.password !== value.confirmPassword) {
       alert('Your password is not same');
       return;
@@ -52,8 +54,9 @@ export class AddUserComponent implements OnInit {
     const isSuccess = this.userService.addUser(user);
 
     if (isSuccess) {
-      this.addForm.reset();
-      alert('Add new user successfully!');
+      this.registerForm.reset();
+
+      this.router.navigate(['/account/login']);
     }
   }
 }
