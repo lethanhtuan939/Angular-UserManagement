@@ -65,11 +65,17 @@ export class UserService {
     return true;
   }
 
-  public deleteUserById(id: number | undefined): void {
+  public deleteUserById(id: number | undefined): boolean {
     const userIndex = this.users.findIndex((u) => u.id === id);
+    if (this.users[userIndex].username === this.currentUser?.username) {
+      alert("You can't delete current user");
+      return false;
+    }
     this.users.splice(userIndex, 1);
 
     this.updateData();
+
+    return true;
   }
 
   public updateUser(user: User) {
@@ -108,5 +114,10 @@ export class UserService {
   private updateData() {
     this.userSubject.next(this.users);
     this.currentUserubject.next(this.currentUser);
+  }
+
+  importDataFromFile(users: User[]) {
+    this.users = users;
+    this.updateToLocalStorage();
   }
 }

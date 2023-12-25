@@ -6,8 +6,13 @@
                 <a routerLink="/users">Users</a>
             </div>
 
-            <div>
-                <button (click)="logout()">Logout</button>
+            <div class="flex gap-4">
+                <div class="flex gap-4">
+                    <div *ngIf="currentUser$ | async as user">
+                        <span>Hello {{ user.username }} !</span>
+                    </div>
+                    <button class="text-gray-300 transition-all hover:text-white" (click)="logout()">Logout</button>
+                </div>
             </div>
         </div>
     </nav>
